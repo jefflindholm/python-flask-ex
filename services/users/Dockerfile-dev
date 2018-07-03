@@ -1,0 +1,27 @@
+FROM python:3.6.6
+
+RUN apt-get update -yqq \
+ && apt-get install -yqq --no-install-recommends netcat \
+ && apt-get -q clean
+
+ #setup directory
+
+ENV APP_DIR /usr/src/app
+
+RUN mkdir -p ${APP_DIR}
+WORKDIR ${APP_DIR}
+
+
+COPY ./Pipfile ${APP_DIR}/Pipfile
+COPY ./Pipfile.lock ${APP_DIR}/Pipfile.lock
+COPY ./entrypoint.sh ${APP_DIR}/entrypoint.sh
+
+EXPOSE 5000:5000
+
+RUN pip install --upgrade pip && pip install pipenv
+RUN pipenv install --python 3.6.6 --system --deploy
+
+COPY . ${APP_DIR}
+
+#ENTRYPOINT python manage.py run -h 0.0.0.0
+CMD ["./entrypoint.sh"]
