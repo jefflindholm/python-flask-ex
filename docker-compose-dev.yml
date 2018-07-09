@@ -10,7 +10,7 @@ services:
     volumes:
       - './services/users:/usr/src/app'
     ports:
-      - '5001:5000'
+      - 5000
     environment:
       - FLASK_DEBUG=1
       - APP_SETTINGS=project.config.DevelopmentConfig
@@ -31,3 +31,12 @@ services:
     environment:
       - POSTFRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
+
+  nginx:
+    container_name: nginx
+    build: ./services/nginx
+    restart: always
+    ports:
+      - 8080:80
+    depends_on:
+      - users
