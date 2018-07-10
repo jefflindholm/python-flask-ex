@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`UsersList renders correct snapshot 1`] = `
+<form>
+  <div class="form-group">
+    <input type="text" required="required" name="username" placeholder="Enter a username" value="" class="form-control input-lg">
+    <input type="text" required="required" name="email" placeholder="Enter an email address" value="" class="form-control input-lg">
+    <input type="submit" value="Submit" class="btn btn-primary btn-lg btn-block">
+  </div>
+</form>
+`;
