@@ -20,6 +20,7 @@ class TestDevelopmentConfig(TestCase):
                         == os.environ.get('DATABASE_URL'))
         self.assertTrue(app.config['DEBUG_TB_ENABLED'])
 
+
 class TestTestingConfig(TestCase):
     def create_app(self):
         app.config.from_object('project.config.TestingConfig')
