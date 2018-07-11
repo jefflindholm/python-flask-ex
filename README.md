@@ -1,6 +1,6 @@
 # Microservice with Docker, Flask, and UI
 
-[![Build Status](https://travis-ci.org/jefflindholm/testdriven-app.svg?branch=master)](https://travis-ci.org/jefflindholm/testdriven-app)
+[![Build Status](https://travis-ci.org/jefflindholm/python-flask-ex.svg?branch=master)](https://travis-ci.org/jefflindholm/python-flask-ex)
 
 
 * start
