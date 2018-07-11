@@ -18,7 +18,7 @@ import axios from 'axios';
 import AddUser from './components/add-user';
 import UsersList from './components/users-list';
 
-const URL = process.env.REACT_APP_USERS_SERVICE_URL || 'http://localhost:8080';
+const URL = process.env.VUE_APP_USERS_SERVICE_URL || 'http://localhost:8080';
 
 function sorter(u1, u2) {
   return u1.username.localeCompare(u2.username);

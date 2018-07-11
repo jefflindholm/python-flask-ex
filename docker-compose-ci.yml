@@ -26,8 +26,6 @@ services:
     build:
       context: ./services/users/project/db
       dockerfile: Dockerfile
-    volumes:
-      - './postgres-data:/var/lib/postgresql/data'
     ports:
       - 5435:5432
     environment:

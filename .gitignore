@@ -2,3 +2,4 @@
 __pycache__
 htmlcov
 node_modules
+postgres-data
