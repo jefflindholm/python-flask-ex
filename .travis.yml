@@ -1,27 +1,23 @@
-sudo: required
+sodu: required
 
 services:
   - docker
 
 env:
-  DOCKER_COMPOSE_VERSION: 1.18.0
+  DOCKER_COMPOSE_VERSION: 1.21.1
 
 before_install:
   - sudo rm /usr/local/bin/docker-compose
-  - curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > docker-compose
+  - curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VE RSION}/docker-compose-`uname -s`-`uname -m` > docker-compose
   - chmod +x docker-compose
   - sudo mv docker-compose /usr/local/bin
 
 before_script:
-  - export REACT_APP_USERS_SERVICE_URL=http://127.0.0.1:8080
-  - export VUE_APP_USERS_SERVICE_URL=http://127.0.0.1:8080
-  - docker-compose -f docker-compose-ci.yml up --build -d
+  - docker-compose -f docker-compose-dev.yml up --build -d
 
 script:
-  - docker-compose -f docker-compose-ci.yml run users python manage.py test
-  - docker-compose -f docker-compose-ci.yml run users flake8 project
-  - docker-compose -f docker-compose-dev.yml run client-react npm run test:unit
-  - docker-compose -f docker-compose-dev.yml run client-vue npm run test:unit
+  - docker-compose -f docker-compose-dev.yml run users python manage.py test
+  - docker-compose -f docker-compose-dev.yml run users flake8 project
 
 after_script:
-  - docker-compose -f docker-compose-ci.yml down
+  - docker-compose -f docker-compose-dev.yml down
