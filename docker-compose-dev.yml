@@ -1,83 +1,41 @@
-version: '3.4'
+version: '3.6'
 
 services:
 
   users:
-    container_name: users-svc
     build:
       context: ./services/users
       dockerfile: Dockerfile-dev
     volumes:
       - './services/users:/usr/src/app'
-    ports:
-      - 5000
+    # ports:
+    #   - 5001:5000
+    expose:
+      - '5000'
     environment:
-      - FLASK_DEBUG=1
+      - FLASK_ENV=development
       - APP_SETTINGS=project.config.DevelopmentConfig
       - DATABASE_URL=postgres://postgres:postgres@users-db:5432/users_dev
       - DATABASE_TEST_URL=postgres://postgres:postgres@users-db:5432/users_test
     depends_on:
       - users-db
-    links:
-      - users-db
 
   users-db:
-    container_name: users-db
     build:
       context: ./services/users/project/db
       dockerfile: Dockerfile
-    volumes:
-      - './postgres-data:/var/lib/postgresql/data'
     ports:
       - 5435:5432
     environment:
-      - POSTFRES_USER=postgres
+      - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
 
   nginx:
-    container_name: nginx
-    build: ./services/nginx
+    build:
+      context: ./services/nginx
+      dockerfile: Dockerfile-dev
     restart: always
     ports:
-      - 8080:80
+      - 80:80
     depends_on:
-      - users
-      - client-react
-      - client-vue
-
-  client-react:
-    container_name: react
-    build:
-      context: ./services/react-ui
-      dockerfile: Dockerfile-dev
-    volumes:
-      - './services/react-ui:/usr/src/app'
-      - '/usr/src/app/node_modules'
-    ports:
-      - '3007:3000'
-    environment:
-      - NODE_ENV=development
-      - REACT_APP_USERS_SERVICE_URL=http://localhost:8080
-    depends_on:
-      - users
-    links:
-      - users
-
-  client-vue:
-    container_name: vue
-    build:
-      context: ./services/vue-ui
-      dockerfile: Dockerfile-dev
-    volumes:
-    volumes:
-      - './services/vue-ui:/usr/src/app'
-      - '/usr/src/app/node_modules'
-    ports:
-      - '3008:3001'
-    environment:
-      - NODE_ENV=development
-      - VUE_APP_USERS_SERVICE_URL=http://localhost:8080
-    depends_on:
-      - users
-    links:
       - users

@@ -1,52 +1,42 @@
 <!DOCTYPE html>
 <html>
-
-<head>
-    <meta charset="utf-8">
-    <title>Flask on Docker</title>
-    <!-- meta -->
+  <head>
+    <meta charaset="utf-8">
+    <title>Your title here</title>
     <meta name="description" content="">
-    <meta name="author" content="">
+    <meta name="author" content="Jeff Lindholm">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <!-- styles -->
-    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet"> {% block css %}{% endblock %}
-</head>
-
-<body>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.min.css">
+    {% block css %}{% endblock %}
+  </head>
+  <body>
     <div class="container">
-        <div class="row">
-            <div class="col-md-4">
-                <br>
-                <h1>All Users</h1>
-                <hr>
-                <br>
-                <form action="/" method="POST">
-                    <div class="form-group">
-                        <input name="username" class="form-control input-lg" type="text" placeholder="Enter a username" required>
-                    </div>
-                    <div class="form-group">
-                        <input name="email" class="form-control input-lg" type="email" placeholder="Enter an email address" required>
-                    </div>
-                    <input type="submit" class="btn btn-primary btn-lg btn-block" value="Submit">
-                </form>
-                <br>
-                <hr> {% if users %}
-                <ol>
-                    {% for user in users %}
-                    <li>{{user.username}}</li>
-                    {% endfor %}
-                </ol>
-                {% else %}
-                <p>No users!</p>
-                {% endif %}
-            </div>
-        </div>
+      <div class="column is-one-third">
+        <br>
+        <h1 class="title">All Users</h1>
+        <hr><br>
+        <form action="/" method="POST">
+          <div class="field">
+            <input type="text" name="username" class="input" placeholder="Enter a username" required>
+          </div>
+          <div class="field">
+            <input type="email" name="email" class="input" placeholder="Enter an email address" required>
+          </div>
+          <input type="submit" value="Submit" class="button is-primary is-fullwidth">
+        </form>
+        <br>
+        <hr>
+          {% if users %}
+            <ol>
+              {% for user in users %}
+                <li>{{user.username}}</li>
+              {% endfor %}
+            </ol>
+          {% else %}
+            <p>No users</p>
+          {% endif %}
+      </div>
     </div>
-    </div>
-    <!-- scripts -->
-    <script type="text/javascript" src="//code.jquery.com/jquery-2.2.4.min.js"></script>
-    <script type="text/javascript" src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js">
-    </script> {% block js %}{% endblock %}
-</body>
-
+    {% block js %}{% endblock %}
+  </body>
 </html>
