@@ -1,0 +1,13 @@
+FROM node:10.4.1-alpine
+
+ENV BASE_DIR /usr/src/app
+
+WORKDIR ${BASE_DIR}
+
+ENV PATH ${BASE_DIR}/node_modules/.bin:$PATH
+
+COPY package.json ${BASE_DIR}/package.json
+RUN npm install
+RUN npm  install react-scripts -g
+
+CMD ["npm", "start"]
