@@ -8,10 +8,10 @@ services:
       dockerfile: Dockerfile-dev
     volumes:
       - './services/users:/usr/src/app'
-    # ports:
-    #   - 5001:5000
-    expose:
-      - '5000'
+    ports:
+      - 5001:5000
+    # expose:
+    #   - '5000'
     environment:
       - FLASK_ENV=development
       - APP_SETTINGS=project.config.DevelopmentConfig
@@ -30,11 +30,24 @@ services:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
 
+  client:
+    build:
+      context: ./services/react-client
+      dockerfile: Dockerfile-dev
+    volumes:
+      - '/c/Users/JLINDHOLM/dev/home/python/td-app/services/react-client:/usr/src/app'
+      - '/usr/src/app/node_modules'
+    ports:
+      - 3007:3000
+    environment:
+      - NODE_ENV=development
+      - REACT_APP_USERS_SERVICE_URL=http://localhost
+
   nginx:
     build:
       context: ./services/nginx
       dockerfile: Dockerfile-dev
-    restart: always
+    # restart: always
     ports:
       - 80:80
     depends_on:
