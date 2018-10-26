@@ -7,6 +7,7 @@ WORKDIR ${BASE_DIR}
 ENV PATH ${BASE_DIR}/node_modules/.bin:$PATH
 
 COPY package.json ${BASE_DIR}/package.json
+COPY . ${BASE_DIR}
 RUN npm install
 RUN npm  install react-scripts -g
 

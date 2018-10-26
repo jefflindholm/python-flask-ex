@@ -13,7 +13,7 @@ class App extends Component {
     super();
     this.state = {
       users: [],
-      username: '',
+      username: 'fo',
       email: '',
     };
     this.getUsers = this.getUsers.bind(this);

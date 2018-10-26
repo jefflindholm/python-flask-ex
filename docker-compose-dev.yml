@@ -35,7 +35,7 @@ services:
       context: ./services/react-client
       dockerfile: Dockerfile-dev
     volumes:
-      - '/c/Users/JLINDHOLM/dev/home/python/td-app/services/react-client:/usr/src/app'
+      - './services/react-client:/usr/src/app'
       - '/usr/src/app/node_modules'
     ports:
       - 3007:3000

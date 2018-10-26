@@ -18,7 +18,8 @@ def create_app(script_info=None):
     swagger_config['swagger_ui_standalone_preset_js'] = '//unpkg.com/swagger-ui-dist@3/swagger-ui-standalone-preset.js'
     swagger_config['jquery_js'] = '//unpkg.com/jquery@2.2.4/dist/jquery.min.js'
     swagger_config['swagger_ui_css'] = '//unpkg.com/swagger-ui-dist@3/swagger-ui.css'
-    # swagger_config['base_dir'] = '/'
+    swagger_config['base_dir'] = '/api'
+    print(swagger_config)
     Swagger(app, config=swagger_config)
 
 
